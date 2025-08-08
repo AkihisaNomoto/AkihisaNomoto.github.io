@@ -1,4 +1,15 @@
-{% if site.url %}
+{%- comment -%}
+  base_path assignment logic
+  Goal: In local development avoid embedding the host (0.0.0.0) in generated asset URLs
+        so that links become origin-relative (e.g. /assets/css/main.css) and styles load.
+  Order now:
+    1. If development environment -> use only site.baseurl (usually "")
+    2. Else if site.url is set -> site.url + site.baseurl (production)
+    3. Else fallback to site.github.url (GitHub build context)
+{%- endcomment -%}
+{% if jekyll.environment == "development" %}
+  {% assign base_path = site.baseurl %}
+{% elsif site.url %}
   {% assign base_path = site.url | append: site.baseurl %}
 {% else %}
   {% assign base_path = site.github.url %}

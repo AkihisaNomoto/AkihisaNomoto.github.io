@@ -1,6 +1,8 @@
 {% include base_path %}
 
 <meta charset="utf-8">
+{% comment %} Moved analytics include into <head> for earlier GA4 loading (was previously in scripts.html) {% endcomment %}
+{% include analytics.html %}
 
 {% include seo.html %}
 
